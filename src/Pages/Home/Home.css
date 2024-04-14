@@ -1,0 +1,357 @@
+/* commom */
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+/* hero-section */
+.home-page {
+    width: 100%;
+    min-height: 100vh;
+}
+.hero-section {
+    background: url("/mosque photo.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 90vh;
+}
+.quote-box-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    justify-content: flex-end;
+    /* padding-left: 3em; */
+    /* padding-bottom: 3em; */
+}
+.quote-box {
+    width: 20em;
+    min-height: 30%;
+    background-color: black;
+    background: rgba(0, 0, 0, 0.53);
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-left: 2em;
+    margin-bottom: -3em;
+}
+.quote {
+    margin-top: 0.5em;
+    margin-inline: 1.2em;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    font-weight: 800;
+    word-wrap: break-word;
+}
+.prayer-button {
+    /* margin-block: 0em; */
+    background-color: #c2fbd7;
+    border-radius: 100px;
+    box-shadow: rgba(44, 187, 99, 0.2) 0 -25px 18px -14px inset,
+        rgba(44, 187, 99, 0.15) 0 1px 2px, rgba(44, 187, 99, 0.15) 0 2px 4px,
+        rgba(44, 187, 99, 0.15) 0 4px 8px, rgba(44, 187, 99, 0.15) 0 8px 16px,
+        rgba(44, 187, 99, 0.15) 0 16px 32px;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto,
+        sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    font-weight: 700;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    cursor: pointer;
+    z-index: 9;
+}
+.shadowformosque {
+    width: 100%;
+    height: 20%;
+    position: relative;
+    background: linear-gradient(0deg, white, transparent);
+}
+
+/* services  */
+
+.services-section {
+    width: 100%;
+    min-height: 60vh;
+    padding-bottom: 2em;
+    background-color: white;
+    text-align: center;
+}
+.services-wrapper {
+    padding-top: 1.5em;
+    text-align: center;
+}
+
+.service-heading {
+    text-align: center;
+    color: #179524;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1em;
+    letter-spacing: 0.6px;
+    word-wrap: break-word;
+}
+.services {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.service {
+    height: 10.5em;
+    width: 10em;
+    background: linear-gradient(180deg, #c6ffb1 0%, white 100%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 43px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 0.5em;
+}
+.service-image {
+    margin-inline: auto;
+    height: auto;
+    width: 60%;
+}
+.service-name {
+    color: black;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.view-more-button {
+    width: 8em;
+    height: 2em;
+    margin-top: 1em;
+    border-radius: 234.5px;
+    color: white;
+    background-color: black;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+.view-more-button:hover {
+    color: black;
+    background-color: white;
+    box-shadow: inset 0 0 0 0.2rem black;
+}
+/* prayer timing  */
+
+.prayer-timing {
+    width: 100%;
+    min-height: 80vh;
+    text-align: center;
+    background: linear-gradient(180deg, white 0%, #aaff8c 48%, #587175 100%);
+    padding-bottom: 2em;
+    overflow-x: hidden;
+}
+.prayer-timing-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    color: black;
+    margin-inline: auto;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.khatib-of-jumma {
+    height: 25em;
+    /* width: 18em; */
+    background: #ffff;
+    border-radius: 33px;
+    border: 0.5px black solid;
+    /* margin-right: 1em; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin-inline: auto;
+}
+
+.khatib-of-jumma-heading {
+    text-align: center;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: capitalize;
+    line-height: 30px;
+    letter-spacing: 0.32px;
+    word-wrap: break-word;
+    margin-top: 1em;
+}
+.image-of-khatib {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.name-of-khatib {
+    color: black;
+    font-size: 36px;
+    font-family: Inter;
+    font-weight: 800;
+    text-transform: capitalize;
+    letter-spacing: 0.36px;
+    word-wrap: break-word;
+}
+.khutuba-details {
+    height: 6em;
+    width: 15em;
+    background: white;
+    border-radius: 10px;
+    border: 0.5px black solid;
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.khutuba-begins-heading {
+    color: black;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: capitalize;
+    letter-spacing: 0.22px;
+    word-wrap: break-word;
+}
+.time-of-jumma-khutuba {
+    width: 80%;
+    height: 50%;
+    background: #1da599;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    transition: all 0.5s;
+}
+.time-of-jumma-khutuba:hover {
+    color: #1da599;
+    background-color: white;
+    box-shadow: inset 0 0 0 0.2rem #1da599;
+}
+/* description on quwwathul islam madrasa */
+
+.madrasa-description-section {
+    width: 100%;
+    min-height: 70vh;
+    background-color: #587175;
+}
+.description-of-institution {
+    font-weight: 800;
+    color: white;
+}
+.quarn-reading-image {
+    width: inherit;
+}
+
+/* namaz quote */
+
+.namaz-quote {
+    max-width: 100%;
+    min-height: 80vh;
+    background: linear-gradient(180deg, #fffaf6 0%, #fff6cf 100%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.namaz-image {
+    width: 50%;
+}
+.quote-on-namaz {
+    width: 50%;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 700;
+    word-wrap: break-word;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+}
+
+/* holy-places */
+.holy-places {
+    max-width: 100%;
+    min-height: 50vh;
+    background: linear-gradient(180deg, #fff6cf 0%, black 100%);
+    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.images {
+    margin-top: 4em;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.images > img {
+    /* width: 20%; */
+    /* height: 25vh; */
+    border-radius: 10%;
+    margin: auto;
+}
+
+/* media queries */
+@media (max-width: 640px) {
+    .quote-box-wrapper {
+        align-items: center;
+    }
+    .quote-box {
+        margin-left: 0em;
+        margin-bottom: 0em;
+    }
+    .prayer-timing-table {
+        width: 90%;
+    }
+    .namaz-quote {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .quote-on-namaz {
+        margin-top: 0.1em;
+        font-size: 130%;
+        width: 80%;
+    }
+}
+@media (max-width: 352px) {
+    .service {
+        width: 80%;
+        height: 15vh;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .service-image {
+        width: 25%;
+    }
+    .service-name {
+        width: 60%;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+}

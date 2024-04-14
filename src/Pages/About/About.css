@@ -1,0 +1,170 @@
+/* about-section */
+.about-section {
+    max-width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(360deg, #2f1743 0%, #999999 100%);
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: center;
+}
+.description-on-qimk,
+.points-about-qimk {
+    margin-left: 4em;
+    text-align: left;
+}
+.wishing-user {
+    margin-left: 1em;
+    margin-bottom: 0.5em;
+    color: #dbc51e;
+    font-size: 4em;
+    font-weight: 900;
+    line-height: 47px;
+    word-wrap: break-word;
+    text-align: left;
+    background: -webkit-repeating-linear-gradient(
+        180deg,
+        #ee8176,
+        #71b7e6,
+        #646cff,
+        #ee8176,
+        #71b7e6,
+        #646cff
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.description-on-qimk > div > span {
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+.description-on-qimk {
+    color: #fffdfd;
+    font-size: 1rem;
+    font-weight: 800;
+    word-wrap: break-word;
+}
+.points-about-qimk {
+    margin-top: 1em;
+}
+.points-about-qimk > div {
+    color: #fffdfd;
+    font-size: 1rem;
+    font-weight: 700;
+}
+/* students-section */
+
+.students-section {
+    max-width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #2f1743 0%, #0d0d0d 100%);
+}
+.heading {
+    font-size: 2rem;
+    font-weight: 800;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+}
+/* .boys {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+} */
+.boys-heading {
+    color: white;
+    font-size: 2rem;
+    font-weight: 800;
+    text-align: left;
+    letter-spacing: 0.07rem;
+    margin-top: 1em;
+}
+.student {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 5%;
+    height: 100%;
+}
+.students-image {
+    height: 60%;
+}
+.girls-heading {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: left;
+    letter-spacing: 0.05rem;
+    margin-top: 3em;
+}
+.students-name {
+    text-align: center;
+    color: black;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1px;
+    word-wrap: break-word;
+}
+.student-class {
+    text-align: center;
+    color: black;
+    font-size: 1rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.16px;
+    word-wrap: break-word;
+}
+.student-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* media queries */
+@media (max-width: 500px) {
+    .wishing-user {
+        font-size: xx-large;
+        margin-left: 1.5em;
+    }
+    .description-on-qimk > div > span {
+        font-size: large;
+    }
+    .description-on-qimk {
+        font-size: medium;
+    }
+    .points-about-qimk > div {
+        font-size: small;
+    }
+    .description-on-qimk,
+    .points-about-qimk {
+        margin-left: 3em;
+    }
+}
+@media (max-width: 767px) {
+    .student {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        border-radius: 0%;
+        height: auto;
+        width: auto;
+        padding-block: .5em;
+        border-radius: 3em;
+        padding-left: .9em;
+
+    }
+    .students-image {
+        width: 25%;
+    }
+    .students-name {
+        font-size: .8em;
+    }
+    .students-class {
+        font-size: .6em;
+    }
+}

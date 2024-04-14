@@ -1,0 +1,74 @@
+.books-and-guide-page {
+    width: 100%;
+    min-height: 80vh;
+    padding-bottom: 3em;
+}
+.books-and-guide-heading {
+    margin-top: 3em;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 900;
+}
+.arabimalayalam-notes {
+    height: 20vh;
+    width: 100%;
+    background-color: #5da2b5;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 2em;
+    margin-top: 2em;
+}
+.arabimalayalam-notes > img {
+    height: 90%;
+}
+.arabimalayalam-notes > span {
+    font-size: 1rem;
+    font-weight: 800;
+    color: white;
+    word-wrap: break-word;
+    text-align: center;
+}
+.madrasa-guide {
+    height: 20vh;
+    width: 100%;
+    background-color: #2f1743;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 2em;
+    margin-top: 2em;
+}
+.madrasa-guide > img {
+    height: 90%;
+}
+.madrasa-guide > span {
+    font-size: 1rem;
+    font-weight: 800;
+    color: white;
+}
+.select-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.classselect {
+    /* margin: auto; */
+    width: 30%;
+    height: 3em;
+    background: #5da2b5;
+    border-radius: 0.5em;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+}
+@media (max-width: 625px) {
+    .classselect {
+        width: 60%;
+    }
+}
+.linktonotes {
+    text-decoration: none;
+}

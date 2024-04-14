@@ -1,0 +1,27 @@
+.column-component {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 5em;
+    padding-bottom: 1em;
+}
+.column-container {
+    min-height: 100vh;
+}
+.column-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
+.single-column {
+    margin: auto;
+    width: 90%;
+    height: 2.5em;
+    border-radius: 1em;
+    background-color: #2f1743;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}

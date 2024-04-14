@@ -1,0 +1,22 @@
+.prayer-time-page {
+    max-width: 100%;
+    min-height: 100vh;
+    padding-top: 7em;
+    /* background  : linear-gradient(0deg, #2f1743, #5DA2B5); */
+    background-color: white;
+}
+.heading-todays-prayer-timing{
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 1em;
+}
+.caution-on-time{
+    width: 50%;
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+.caution-on-time > span{
+    font-size: 1rem;
+    font-weight: 600;
+}

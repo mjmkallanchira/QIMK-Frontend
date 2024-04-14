@@ -1,0 +1,42 @@
+.live-page{
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 8em;
+}
+.live-details-heading{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+}
+.youtube-lives{
+    padding-top: 5em;
+}
+.live{
+    width: 100%;
+    min-height: 100%;
+    /* background-color: #d3d3d3; */
+    background-color: #202124;
+    border-radius: 1em;
+    padding: 1em;
+    text-align: center;
+}
+.live-container{
+    min-height: 100vh;
+}
+.youtube-live-video-iframe{
+    width: 98%;
+    margin: auto;
+    border-radius: 1em;
+    height: 100%;
+}
+.name-of-live{
+    font-size: 1.5rem;
+    width: 100%;
+    color: white;
+    text-overflow: ellipsis;
+    font-weight: 600;
+    
+}
+.date-of-posted{
+    color: white;
+}
