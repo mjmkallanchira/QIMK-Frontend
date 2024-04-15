@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 function Services({ home }) {
-    console.log(home);
     const navigate = useNavigate();
     return (
         <div>
