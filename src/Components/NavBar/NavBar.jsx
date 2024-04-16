@@ -2,7 +2,7 @@ import { Fragment, useContext } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import "./NavBar.css";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { UserContext } from "../../Context/UserContext";
 
 const navigation = [
