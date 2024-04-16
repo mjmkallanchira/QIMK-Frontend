@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { UserContext } from "../../Context/UserContext";
 
 function SignUp() {
+    const { setispageloading } = useContext(UserContext);
     const navigate = useNavigate();
 
     const { storetokeninlokalstorage } = useContext(UserContext);
@@ -20,30 +21,38 @@ function SignUp() {
     };
     const handlesubmit = (e) => {
         e.preventDefault();
-        fetch(`${server}/signup`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(userdetails),
-        }).then(async (result) => {
-            if (result.ok) {
-                const { response, token } = await result.json();
-                storetokeninlokalstorage(token);
-                setuserdetails({
-                    username: "",
-                    email: "",
-                    phone: "",
-                    password: "",
-                    isadmin: false,
-                });
-                toast.success("Sign up Succesfull");
-                navigate("/signin");
-            } else {
-                const error = await result.json();
-                toast.error(error.err);
-            }
-        });
+        try {
+            setispageloading(true);
+            fetch(`${server}/signup`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userdetails),
+            }).then(async (result) => {
+                if (result.ok) {
+                    const { response, token } = await result.json();
+                    storetokeninlokalstorage(token);
+                    setuserdetails({
+                        username: "",
+                        email: "",
+                        phone: "",
+                        password: "",
+                        isadmin: false,
+                    });
+                    setispageloading(false);
+                    toast.success("Sign up Succesfull");
+                    navigate("/signin");
+                } else {
+                    const error = await result.json();
+                    setispageloading(false);
+                    toast.error(error.err);
+                }
+            });
+        } catch (error) {
+            setispageloading(false);
+            console.log(error);
+        }
     };
     return (
         <>

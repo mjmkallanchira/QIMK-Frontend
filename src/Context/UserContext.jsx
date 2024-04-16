@@ -8,7 +8,7 @@ export const Authprovider = ({ children }) => {
     const [token, settoken] = useState(localStorage.getItem("token"));
     const [user, setuser] = useState();
     const [ispageloading, setispageloading] = useState(false);
-    const [userloading, setuserloading] = useState(true);
+    const [fetchloading, setfetchloading] = useState(true);
     const storetokeninlokalstorage = (token) => {
         settoken(token);
         return localStorage.setItem("token", token);
@@ -22,7 +22,7 @@ export const Authprovider = ({ children }) => {
     let isloggedin = !!token;
     const jwtauthentication = async () => {
         try {
-            setuserloading(true);
+            setfetchloading(true);
             const response = await fetch(`${server}/userdata`, {
                 method: "GET",
                 headers: {
@@ -34,11 +34,11 @@ export const Authprovider = ({ children }) => {
                 const data = await response.json();
                 // console.log(data);
                 setuser(data.userdetails);
-                setuserloading(false);
+                setfetchloading(false);
                 // console.log();
             }
         } catch (error) {
-            setuserloading(false);
+            setfetchloading(false);
             console.log(error);
         }
     };
@@ -51,7 +51,7 @@ export const Authprovider = ({ children }) => {
             value={{
                 ispageloading,
                 setispageloading,
-                userloading,
+                fetchloading,
                 storetokeninlokalstorage,
                 Logoutuser,
                 isloggedin,

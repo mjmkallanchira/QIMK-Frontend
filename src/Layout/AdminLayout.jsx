@@ -5,12 +5,12 @@ import { UserContext } from "../Context/UserContext";
 import { Navigate } from "react-router-dom";
 import Loading from "../Components/Loading/Loading";
 function AdminLayout() {
-    const { user, ispageloading, userloading, token } = useContext(UserContext);
+    const { user, ispageloading, fetchloading, token } = useContext(UserContext);
 
     if (!token) {
         return <Navigate to="/signin" />;
     }
-    if (userloading) {
+    if (fetchloading) {
         return <Loading />;
     }
 

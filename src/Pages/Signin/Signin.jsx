@@ -4,6 +4,8 @@ import { server } from "../../Constants/Constant";
 import { toast } from "react-toastify";
 import { UserContext } from "../../Context/UserContext";
 function Signin() {
+    const { setispageloading } = useContext(UserContext);
+
     const navigate = useNavigate();
     const { storetokeninlokalstorage } = useContext(UserContext);
     const [usersignin, setusersignin] = useState({
@@ -15,6 +17,7 @@ function Signin() {
     };
     const handlesubmit = async (e) => {
         e.preventDefault();
+        setispageloading(true);
         try {
             const response = await fetch(`${server}/signin`, {
                 method: "POST",
@@ -31,13 +34,16 @@ function Signin() {
                     email: "",
                     password: "",
                 });
+                setispageloading(false);
                 toast.success("login succesfull");
                 navigate("/");
             } else {
                 const { err } = await response.json();
+                setispageloading(false);
                 toast.error(err);
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
