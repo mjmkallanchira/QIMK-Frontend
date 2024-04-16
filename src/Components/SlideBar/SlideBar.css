@@ -74,7 +74,7 @@
     min-height: 100vh;
     max-width: 300px;
     /* max-width: 300px; */
-    transition: 0.2s linear;
+    transition: 0.2s ease;
 }
 
 .sidebar h3 {
@@ -93,7 +93,7 @@
     padding: 1em;
     color: #fff;
     text-decoration: none;
-    transition: 0.2s linear;
+    transition: 0.2s ease;
 }
 
 .sidebar .menu .menu-item:hover,
@@ -150,7 +150,7 @@
         height: 100vh;
         width: 100%;
         max-width: 300px;
-        transition: 0.2s linear;
+        transition: 0.2s ease;
     }
 
     .sidebar.is-active {
