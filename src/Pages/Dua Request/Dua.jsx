@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react";
 import { server } from "../../Constants/Constant";
 import { UserContext } from "../../Context/UserContext";
-import { json } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Dua() {
     const [userdata, setuserdata] = useState(true);
-    const { user } = useContext(UserContext);
+    const { user, setispageloading } = useContext(UserContext);
     const [duadetails, setduadetails] = useState({
         name: "",
         email: "",
@@ -18,6 +17,7 @@ function Dua() {
     };
     const handlesubmit = async (e) => {
         e.preventDefault();
+        setispageloading(true);
         try {
             const response = await fetch(`${server}/add-dua-request`, {
                 method: "POST",
@@ -28,11 +28,14 @@ function Dua() {
             });
             console.log(response);
             if (response.ok) {
+                setispageloading(false);
                 toast.success("Sended Dua request Successfully");
             } else {
+                setispageloading(false);
                 toast.error("Failed Sending Dua request Please try again");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };

@@ -4,10 +4,9 @@ import { server } from "../../Constants/Constant";
 import { toast } from "react-toastify";
 import { UserContext } from "../../Context/UserContext";
 function Signin() {
-    const { setispageloading } = useContext(UserContext);
-
     const navigate = useNavigate();
-    const { storetokeninlokalstorage } = useContext(UserContext);
+    const { storetokeninlokalstorage, setispageloading } =
+        useContext(UserContext);
     const [usersignin, setusersignin] = useState({
         email: "",
         password: "",
@@ -17,8 +16,8 @@ function Signin() {
     };
     const handlesubmit = async (e) => {
         e.preventDefault();
-        setispageloading(true);
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/signin`, {
                 method: "POST",
                 headers: {

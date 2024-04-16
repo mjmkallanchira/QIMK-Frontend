@@ -6,7 +6,7 @@ import { UserContext } from "../../Context/UserContext";
 
 function ContactUs() {
     const [userdata, setuserdata] = useState(true);
-    const { user } = useContext(UserContext);
+    const { user, setispageloading } = useContext(UserContext);
     const [contactdetails, setcontactdetails] = useState({
         name: "",
         email: "",
@@ -17,6 +17,7 @@ function ContactUs() {
     };
     const handlesubmit = async (e) => {
         e.preventDefault();
+        setispageloading(true)
         const response = await fetch(`${server}/contact`, {
             method: "POST",
             headers: {
@@ -25,13 +26,15 @@ function ContactUs() {
             body: JSON.stringify(contactdetails),
         });
         if (response.ok) {
-            toast.success("message sent successfully");
             setcontactdetails({
                 name: "",
                 email: "",
                 message: "",
             });
+            setispageloading(false)
+            toast.success("message sent successfully");
         } else {
+            setispageloading(false)
             toast.error(" Failed to sent the message ");
         }
     };

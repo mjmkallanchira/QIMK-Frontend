@@ -5,10 +5,10 @@ import { toast } from "react-toastify";
 import { UserContext } from "../../Context/UserContext";
 
 function SignUp() {
-    const { setispageloading } = useContext(UserContext);
     const navigate = useNavigate();
 
-    const { storetokeninlokalstorage } = useContext(UserContext);
+    const { storetokeninlokalstorage, setispageloading } =
+        useContext(UserContext);
     const [userdetails, setuserdetails] = useState({
         username: "",
         email: "",
