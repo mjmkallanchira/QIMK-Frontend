@@ -9,29 +9,17 @@ function AdminLayout() {
     if (!token) {
         return <Navigate to="/signin" />;
     }
-    // if (ispageloading) {
-    //     return <h1>Loading.....</h1>;
-    // }
+    if (ispageloading) {
+        return <h1>Loading.....</h1>;
+    }
 
-    // if (!user.isadmin) {
-    //     console.log("hello");
-    //     // return <Navigate to="/" />;
-    // }
+    if (!user.isadmin) {
+        return <Navigate to="/" />;
+    }
 
     return (
         <div>
-            {ispageloading ? (
-                <SlideBar />
-            ) : !user.isadmin ? (
-                <Navigate to="/" />
-            ) : (
-                <>
-                    <SlideBar />
-                    <div className="p-4 sm:ml-64">
-                        <Outlet />
-                    </div>
-                </>
-            )}
+            <SlideBar Outlet={Outlet} />
         </div>
     );
 }
