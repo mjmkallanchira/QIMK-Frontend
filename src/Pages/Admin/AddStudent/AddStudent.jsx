@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { server } from "../../../Constants/Constant";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../Context/UserContext";
 function AddStudent() {
     const navigate = useNavigate();
+    const { setispageloading } = useContext(UserContext);
     const [studentdata, setstudentdata] = useState({
         name: "",
         class: "",
@@ -28,6 +30,7 @@ function AddStudent() {
     const handlesubmit = async (e) => {
         e.preventDefault();
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/admin/add-student`, {
                 method: "POST",
                 headers: {
@@ -38,12 +41,15 @@ function AddStudent() {
             console.log(response);
             if (response.ok) {
                 setstudentdata({ name: "", gender: "", class: "", image: "" });
+                setispageloading(false);
                 toast.success("student added successfully");
             } else {
                 const error = await response.json();
+                setispageloading(false);
                 toast.error(error.err);
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };

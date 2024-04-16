@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { server } from "../../../Constants/Constant";
 import { toast } from "react-toastify";
-
+import { UserContext } from "../../../Context/UserContext";
 function DikrPdf() {
+    const { setispageloading } = useContext(UserContext);
     const [dikrdetails, setdikrdetails] = useState({
         name: "",
         file: "",
@@ -42,6 +43,7 @@ function DikrPdf() {
     const handlesubmit = async (e) => {
         e.preventDefault();
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/admin/add-dikr-pdf`, {
                 method: "POST",
                 headers: {
@@ -52,17 +54,23 @@ function DikrPdf() {
             if (response.ok) {
                 setdikrdetails({ name: "", file: "" });
                 getalldikrs();
+                setispageloading(false);
                 toast.success("added pdf successfully");
             } else {
+                setispageloading(false);
+
                 toast.error("Dikr Already Exist ");
             }
         } catch (error) {
+            setispageloading(false);
+
             console.log(error);
         }
     };
 
     const deletedikr = async (id) => {
         try {
+            setispageloading(true);
             const response = await fetch(
                 `${server}/admin/delete-dikr-pdf/${id}`,
                 {
@@ -74,12 +82,14 @@ function DikrPdf() {
             );
             if (response.ok) {
                 getalldikrs();
-                set;
+                setispageloading(false);
                 toast.success("Deleted Dikr pdf successfully  ");
             } else {
+                setispageloading(false);
                 toast.error("Failed deleting  pdf  ");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };

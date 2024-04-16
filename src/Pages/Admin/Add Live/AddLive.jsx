@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { server } from "../../../Constants/Constant";
 import { toast } from "react-toastify";
-
+import { UserContext } from "../../../Context/UserContext";
 function AddLive() {
+    const { setispageloading } = useContext(UserContext);
     const [alllive, setalllive] = useState([]);
     const [livedata, setlivedata] = useState({
         title: "",
@@ -15,6 +16,7 @@ function AddLive() {
     const handlesubmit = async (e) => {
         e.preventDefault();
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/admin/addlive`, {
                 method: "POST",
                 headers: {
@@ -30,11 +32,14 @@ function AddLive() {
                     date: "",
                 });
                 getalllive();
+                setispageloading(false);
                 toast.success("Added Live succesfully");
             } else {
+                setispageloading(false);
                 toast.error("Failed to add Live ");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
@@ -59,6 +64,7 @@ function AddLive() {
     };
     const deletelive = async (id) => {
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/admin/delete-live/${id}`, {
                 method: "DELETE",
                 headers: {
@@ -67,11 +73,14 @@ function AddLive() {
             });
             if (response.ok) {
                 getalllive();
+                setispageloading(false);
                 toast.success("Deleted live succesfully");
             } else {
+                setispageloading(false);
                 toast.error("Failed to deleted live ");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };

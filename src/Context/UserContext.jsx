@@ -7,7 +7,8 @@ export const UserContext = createContext();
 export const Authprovider = ({ children }) => {
     const [token, settoken] = useState(localStorage.getItem("token"));
     const [user, setuser] = useState();
-    const [ispageloading, setispageloading] = useState(true);
+    const [ispageloading, setispageloading] = useState(false);
+    const [userloading, setuserloading] = useState(true);
     const storetokeninlokalstorage = (token) => {
         settoken(token);
         return localStorage.setItem("token", token);
@@ -21,7 +22,7 @@ export const Authprovider = ({ children }) => {
     let isloggedin = !!token;
     const jwtauthentication = async () => {
         try {
-            setispageloading(true);
+            setuserloading(true);
             const response = await fetch(`${server}/userdata`, {
                 method: "GET",
                 headers: {
@@ -33,11 +34,11 @@ export const Authprovider = ({ children }) => {
                 const data = await response.json();
                 // console.log(data);
                 setuser(data.userdetails);
-                setispageloading(false);
+                setuserloading(false);
                 // console.log();
             }
         } catch (error) {
-            setispageloading(false);
+            setuserloading(false);
             console.log(error);
         }
     };
@@ -49,6 +50,8 @@ export const Authprovider = ({ children }) => {
         <UserContext.Provider
             value={{
                 ispageloading,
+                setispageloading,
+                userloading,
                 storetokeninlokalstorage,
                 Logoutuser,
                 isloggedin,

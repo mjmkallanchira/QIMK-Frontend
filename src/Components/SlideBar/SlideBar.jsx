@@ -227,7 +227,7 @@ function SlideBar({ Outlet }) {
                     </div>
                 </aside>
                 {/* </div> */}
-                <main className="content  overflow-scroll ">
+                <main className="content overflow-x-scroll ">
                     <Outlet />
                 </main>
             </div>

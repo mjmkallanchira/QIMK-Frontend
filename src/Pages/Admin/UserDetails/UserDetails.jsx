@@ -4,6 +4,7 @@ import { UserContext } from "../../../Context/UserContext";
 import { toast } from "react-toastify";
 
 function UserDetails() {
+    const {setispageloading}=useContext(UserContext)
     const { user } = useContext(UserContext);
     const [alluser, setalluser] = useState([]);
     const getallusers = async () => {
@@ -28,6 +29,7 @@ function UserDetails() {
     };
     const changeadminstate = async (isadmin, userid) => {
         try {
+            setispageloading(true);
             const response = await fetch(
                 `${server}/admin/changeadmin/${!isadmin}/${userid}`,
                 {
@@ -40,13 +42,24 @@ function UserDetails() {
             console.log(response);
             if (response.ok) {
                 getallusers();
+                setispageloading(false);
+
                 toast.success(
                     `converted ${isadmin ? "Admin" : "User"} to ${
                         isadmin ? "User" : "Admin"
                     }`
                 );
+            } else {
+                setispageloading(false);
+
+                toast.error(
+                    `Failed to change  ${isadmin ? "Admin" : "User"} to ${
+                        isadmin ? "User" : "Admin"
+                    }`
+                );
             }
         } catch (error) {
+            setispageloading(false);
             console.error(error);
         }
     };

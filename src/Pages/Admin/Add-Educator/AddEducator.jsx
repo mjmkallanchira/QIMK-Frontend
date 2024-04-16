@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { server } from "../../../Constants/Constant";
 import { toast } from "react-toastify";
+import { UserContext } from "../../../Context/UserContext";
 
 function AddEducator() {
+    const { setispageloading } = useContext(UserContext);
     const [educatordetails, seteducatordetails] = useState({
         name: "",
         image: "",
@@ -25,6 +27,8 @@ function AddEducator() {
     const handlesubmit = async (e) => {
         e.preventDefault();
         try {
+            setispageloading(true);
+
             const response = await fetch(`${server}/admin/add-educator`, {
                 method: "POST",
                 headers: {
@@ -35,11 +39,14 @@ function AddEducator() {
             console.log(response);
             if (response.ok) {
                 seteducatordetails({ name: "", image: "" });
+                setispageloading(false);
                 toast.success("Educator Added Successfully");
             } else {
+                setispageloading(false);
                 toast.error(" Failed to Add Educator ");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
@@ -65,6 +72,7 @@ function AddEducator() {
     };
     const deleteeducator = async (id) => {
         try {
+            setispageloading(true);
             const response = await fetch(
                 `${server}/admin/delete-educator/${id}`,
                 {
@@ -77,11 +85,14 @@ function AddEducator() {
             console.log(response);
             if (response.ok) {
                 geteducatordata();
+                setispageloading(false);
                 toast.success("Deleted Educator Successfully");
             } else {
+                setispageloading(false);
                 toast.error("Failed to Delete Educator");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
@@ -164,7 +175,7 @@ function AddEducator() {
                 {/* table */}
                 <div className="p-6 w-full text-center shadow-2xl mb-1 mt-10  space-y-4 md:space-y-6 sm:p-8">
                     <span className="text-2xl font-medium ">
-                       Delete Educator
+                        Delete Educator
                     </span>
                     <div className="flex flex-col  ">
                         <div className="-m-1.5 overflow-x-auto ">

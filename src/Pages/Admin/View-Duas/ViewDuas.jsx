@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { server } from "../../../Constants/Constant";
 import { toast } from "react-toastify";
+import { UserContext } from "../../../Context/UserContext";
 function ViewDuas() {
+    const {setispageloading}=useContext(UserContext)
+
     const [Duadetails, setDuadetails] = useState([]);
 
     const getduadata = async () => {
@@ -22,6 +25,7 @@ function ViewDuas() {
         }
     };
     const deletedua = async (id) => {
+        setispageloading(true)
         try {
             const response = await fetch(`${server}/admin/delete-dua/${id}`, {
                 method: "GET",
@@ -31,11 +35,14 @@ function ViewDuas() {
             });
             if (response.ok) {
                 getduadata();
+                setispageloading(false)
                 toast.success("Deleted Dua Successfully ");
             } else {
+                setispageloading(false)
                 toast.error("Failed Deleting Dua  ");
             }
         } catch (error) {
+            setispageloading(false)
             console.error(error);
         }
     };

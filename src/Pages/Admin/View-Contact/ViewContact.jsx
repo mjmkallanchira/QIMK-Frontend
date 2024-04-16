@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { server } from "../../../Constants/Constant";
 import { toast } from "react-toastify";
-import { UserContext } from "../../../Context/UserContext";
 
+import { UserContext } from "../../../Context/UserContext";
 function ViewContact() {
+    const { setispageloading } = useContext(UserContext);
     const { token } = useContext(UserContext);
 
     const [contactdetails, setcontactdetails] = useState([]);
@@ -30,6 +31,7 @@ function ViewContact() {
     };
     const deletecontact = async (id) => {
         try {
+            setispageloading(true);
             const response = await fetch(
                 `${server}/admin/delete-contact/${id}`,
                 {
@@ -41,12 +43,15 @@ function ViewContact() {
             );
             console.log(response);
             if (response.ok) {
-                toast.success("Deleted contact successfully");
                 getcontactdetails();
+                setispageloading(false);
+                toast.success("Deleted contact successfully");
             } else {
+                setispageloading(false);
                 toast.error(" Failed to deleted contact");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };

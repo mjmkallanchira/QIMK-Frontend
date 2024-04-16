@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { server } from "../../../Constants/Constant";
 import { toast } from "react-toastify";
 import { UserContext } from "../../../Context/UserContext";
 function AddPrayerTime() {
+    const { setispageloading } = useContext(UserContext);
     const navigate = useNavigate();
     const [isjumma, setisjumma] = useState(false);
     const [allprayertime, setallprayertime] = useState([]);
@@ -34,6 +35,7 @@ function AddPrayerTime() {
     };
     const handlesubmit = async (e) => {
         e.preventDefault();
+        setispageloading(true);
         try {
             fetch(`${server}/admin/add-prayer-time`, {
                 method: "POST",
@@ -57,11 +59,14 @@ function AddPrayerTime() {
                     });
                     toast.success("Added prayer time seccessfully");
                     getallprayertime();
+                    setispageloading(false);
                 } else {
+                    setispageloading(false);
                     toast.error("The prayer time already exist ");
                 }
             });
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
@@ -90,6 +95,7 @@ function AddPrayerTime() {
     };
     const deleteprayertime = async (id) => {
         try {
+            setispageloading(true)
             const response = await fetch(
                 `${server}/admin/delete-prayer-time/${id}`,
                 {
@@ -97,16 +103,18 @@ function AddPrayerTime() {
                     headers: {
                         "Content-Type": "application/json",
                     },
-
                 }
             );
             if (response.ok) {
                 getallprayertime();
+                setispageloading(false)
                 toast.success("Deleted prayer time succesfully ");
             } else {
+                setispageloading(false)
                 toast.error("Failed to delete prayer time ");
             }
         } catch (error) {
+            setispageloading(false)
             console.log(error);
         }
     };
@@ -415,33 +423,40 @@ function AddPrayerTime() {
                                             </thead>
                                             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                                                 {allprayertime &&
-                                                    allprayertime.map((obj,index) => {
-                                                        return (
-                                                            <tr key={index} className="bg-white">
-                                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-black dark:text-slate-950">
-                                                                    {obj.date}
-                                                                </td>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-800 dark:text-black">
-                                                                    <button
-                                                                        onClick={() => {
-                                                                            if (
-                                                                                window.confirm(
-                                                                                    "are you sure you want to delete"
-                                                                                )
-                                                                            ) {
-                                                                                deleteprayertime(
-                                                                                    obj._id
-                                                                                );
-                                                                            }
-                                                                        }}
-                                                                        className=" btn btn-danger text-white bg-red-600  text-decoration-none "
-                                                                    >
-                                                                        Delete
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    })}
+                                                    allprayertime.map(
+                                                        (obj, index) => {
+                                                            return (
+                                                                <tr
+                                                                    key={index}
+                                                                    className="bg-white"
+                                                                >
+                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-black dark:text-slate-950">
+                                                                        {
+                                                                            obj.date
+                                                                        }
+                                                                    </td>
+                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-800 dark:text-black">
+                                                                        <button
+                                                                            onClick={() => {
+                                                                                if (
+                                                                                    window.confirm(
+                                                                                        "are you sure you want to delete"
+                                                                                    )
+                                                                                ) {
+                                                                                    deleteprayertime(
+                                                                                        obj._id
+                                                                                    );
+                                                                                }
+                                                                            }}
+                                                                            className=" btn btn-danger text-white bg-red-600  text-decoration-none "
+                                                                        >
+                                                                            Delete
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            );
+                                                        }
+                                                    )}
                                             </tbody>
                                         </table>
                                     </div>

@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { server } from "../../Constants/Constant";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import { UserContext } from "../../Context/UserContext";
 function ChapterHandling() {
+    const { setispageloading } = useContext(UserContext);
     const { componentname } = useParams();
     const [subjectdata, setsubjectdata] = useState([]);
     const [subjectfilterdata, setsubjectfilterdata] = useState([]);
@@ -86,6 +88,7 @@ function ChapterHandling() {
     };
     const handlesubmit = async (e) => {
         e.preventDefault();
+        setispageloading(true);
         try {
             const response = await fetch(
                 `${server}/admin/${componentname}/add-chapter`,
@@ -102,12 +105,15 @@ function ChapterHandling() {
                 setsubmitdata({ name: "", file: "", class: "", subject: "" });
                 getalldata();
                 setdeletedetails({ chapter: "", class: "", subject: "" });
+                setispageloading(false);
                 toast.success("Added chapter successfully");
             } else {
                 const error = await response.json();
+                setispageloading(false);
                 toast.error(error.err);
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
@@ -137,6 +143,7 @@ function ChapterHandling() {
     };
     const handledeletesubmit = async () => {
         try {
+            setispageloading(true);
             const response = await fetch(
                 `${server}/admin/${componentname}/delete-chapter`,
                 {
@@ -152,11 +159,14 @@ function ChapterHandling() {
                 getsubjectdata();
                 setsubmitdata({ name: "", file: "", class: "", subject: "" });
                 setdeletedetails({ chapter: "", class: "", subject: "" });
+                setispageloading(false);
                 toast.success("Deleted Chapter Successfully");
             } else {
+                setispageloading(false);
                 toast.error("Failed Deleting  Chapter ");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
@@ -284,7 +294,7 @@ function ChapterHandling() {
                                         class="py-3 dark px-4 pe-9  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
                                         <option selected="">
-                                            Select the gender
+                                            Select the Subject
                                         </option>
                                         {subjectfilterdata.map((obj) => {
                                             return (

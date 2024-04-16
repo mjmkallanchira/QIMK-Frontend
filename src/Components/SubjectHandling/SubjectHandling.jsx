@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { server } from "../../Constants/Constant";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import { UserContext } from "../../Context/UserContext";
 function SubjectHandling() {
+    const { setispageloading } = useContext(UserContext);
     const { componentname } = useParams();
     const [fetchdata, setfetchdata] = useState([]);
     const [deletesubject, setdeletesubject] = useState({
@@ -20,6 +22,7 @@ function SubjectHandling() {
     const handlesubjectsubmit = async (e) => {
         e.preventDefault();
         try {
+            setispageloading(true);
             const response = await fetch(
                 `${server}/admin/${componentname}/add-subject`,
                 {
@@ -34,12 +37,15 @@ function SubjectHandling() {
             if (response.ok) {
                 setaddsubject({ name: "", class: "" });
                 getsubjectdata();
+                setispageloading(false);
                 toast.success("Added subject successfully");
             } else {
                 const error = await response.json();
+                setispageloading(false);
                 toast.error(error.err);
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
@@ -79,6 +85,7 @@ function SubjectHandling() {
     const handlesubjectdelete = async (e) => {
         e.preventDefault();
         try {
+            setispageloading(true);
             const response = await fetch(
                 `${server}/admin/${componentname}/delete-subject`,
                 {
@@ -92,11 +99,14 @@ function SubjectHandling() {
             if (response.ok) {
                 setdeletesubject({ class: "", subject: "" });
                 getsubjectdata();
+                setispageloading(false);
                 toast.success("Deleted subject Successfully");
             } else {
+                setispageloading(false);
                 toast.success("Failed to Delete subject");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };

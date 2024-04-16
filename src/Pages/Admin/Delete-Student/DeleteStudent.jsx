@@ -7,6 +7,7 @@ import { UserContext } from "../../../Context/UserContext";
 function DeleteStudent() {
     const [alldata, setalldata] = useState([]);
     const { token } = useContext(UserContext);
+    const { setispageloading } = useContext(UserContext);
 
     const [deletesubmit, setdeletesubmit] = useState({
         gender: "",
@@ -67,6 +68,7 @@ function DeleteStudent() {
     };
     const handlesubmit = async () => {
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/admin/delete-student`, {
                 method: "POST",
                 headers: {
@@ -83,11 +85,14 @@ function DeleteStudent() {
                 });
                 setdeletesubmit({ gender: "", class: "", name: "" });
                 fetchstudentdata();
+                setispageloading(false);
                 toast.success("Student Deleted Successfully");
             } else {
+                setispageloading(false);
                 toast.error("Failed to delete Student");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };

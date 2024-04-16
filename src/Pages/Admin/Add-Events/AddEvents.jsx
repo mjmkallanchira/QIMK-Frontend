@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { server } from "../../../Constants/Constant";
 import { toast } from "react-toastify";
 
+import { UserContext } from "../../../Context/UserContext";
 function AddEvents() {
+    const { setispageloading } = useContext(UserContext);
+
     const [allevents, setallevents] = useState([]);
     const [eventdata, seteventdata] = useState({
         description: "",
@@ -16,6 +19,7 @@ function AddEvents() {
     const handlesubmit = async (e) => {
         e.preventDefault();
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/admin/addevent`, {
                 method: "POST",
                 headers: {
@@ -31,11 +35,14 @@ function AddEvents() {
                     date: "",
                 });
                 getallevent();
+                setispageloading(false);
                 toast.success("Added event succesfully");
             } else {
+                setispageloading(false);
                 toast.error("Failed to add event ");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
@@ -60,6 +67,7 @@ function AddEvents() {
     };
     const deletelevent = async (id) => {
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/admin/delete-event/${id}`, {
                 method: "DELETE",
                 headers: {
@@ -68,11 +76,14 @@ function AddEvents() {
             });
             if (response.ok) {
                 getallevent();
+                setispageloading(false);
                 toast.success("Deleted Event succesfully");
             } else {
+                setispageloading(false);
                 toast.error("Failed to deleted event ");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
