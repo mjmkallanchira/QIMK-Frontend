@@ -22,15 +22,7 @@ function Dikr() {
             console.log(error);
         }
     };
-    function debugBase64(base64URL, name) {
-        var win = window.open();
-        win.document.write("<html><head><title>" + name + "</title></head>");
-        win.document.write(
-            '<body style="margin:0px;padding:0px;" ><iframe src="' +
-                base64URL +
-                '" frameborder="0" style="border:0;margin:0px; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen ></iframe></body>'
-        );
-    }
+   
     useEffect(() => {
         getalldikr();
     }, []);
@@ -45,9 +37,7 @@ function Dikr() {
                             return (
                                 <div className="col-12 mx-auto col-md-7 mt-3">
                                     <NavLink
-                                        onClick={() => {
-                                            debugBase64(obj.file, obj.name);
-                                        }}
+                                        to={`/dikr/${obj.name}`}
                                         className="single-column text-decoration-none text-white  "
                                     >
                                         {obj.name}

@@ -36,6 +36,7 @@ import Dikr from "./Pages/Dikr/Dikr";
 import Quran from "./Pages/Quran/Quran";
 import Dua from "./Pages/Dua Request/Dua";
 import ViewDuas from "./Pages/Admin/View-Duas/ViewDuas";
+import ViewDikr from "./Components/View-dikr/ViewDikr";
 function App() {
     return (
         < >
@@ -62,6 +63,7 @@ function App() {
                     />
                     <Route path="/live" element={<Live />} />
                     <Route path="/Dikr" element={<Dikr />} />
+                    <Route path="/Dikr/:name" element={<ViewDikr     />} />
                     <Route path="/dua" element={<Dua />} />
                     <Route path="/Quran" element={<Quran />} />
                     <Route path="/signin" element={<Signin />} />
