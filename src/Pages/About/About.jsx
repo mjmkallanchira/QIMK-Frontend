@@ -4,7 +4,7 @@ import { UserContext } from "../../Context/UserContext";
 import { server } from "../../Constants/Constant";
 import { toast } from "react-toastify";
 function About() {
-    const { user } = useContext(UserContext);
+    const { user, setispageloading } = useContext(UserContext);
     const [studentdata, setstudentdata] = useState({
         boys: [],
         girls: [],
@@ -13,6 +13,7 @@ function About() {
 
     const getallstudentdata = async () => {
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/getallstudentdata`, {
                 method: "GET",
                 headers: {
@@ -42,15 +43,19 @@ function About() {
                 // console.log(girls);
                 // console.log(girls);
                 setstudentdata({ boys: boys, girls: girls });
+                setispageloading(false);
             } else {
+                setispageloading(false);
                 toast.error("failed to load students tab");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
     const geteducatordata = async () => {
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/get-educator-data`, {
                 method: "GET",
                 headers: {
@@ -61,10 +66,13 @@ function About() {
             if (response.ok) {
                 const data = await response.json();
                 seteducatorsdata(data);
+                setispageloading(false);
             } else {
+                setispageloading(false);
                 toast.error("Failed to load educators tab");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
@@ -105,9 +113,12 @@ function About() {
                     <div className="heading">Educators of QIMK</div>
                     <div className="container">
                         <div className="row">
-                            {educatorsdata.map((obj,index) => {
+                            {educatorsdata.map((obj, index) => {
                                 return (
-                                    <div key={index} className="students-column mt-4 col-12 mx-auto col-md-6 col-lg-4 col-xl-3">
+                                    <div
+                                        key={index}
+                                        className="students-column mt-4 col-12 mx-auto col-md-6 col-lg-4 col-xl-3"
+                                    >
                                         <div className="student ">
                                             <img
                                                 src={obj.image}
@@ -135,8 +146,8 @@ function About() {
                                 {studentdata.boys.map((obj, index) => {
                                     index = index + 1;
                                     return (
-                                        <div key={index} >
-                                            <div  className="text-xl font-bold text-white mt-3 text-center">
+                                        <div key={index}>
+                                            <div className="text-xl font-bold text-white mt-3 text-center">
                                                 class:
                                                 {index < 11 ? index : ""}
                                                 {index > 11 ? "+" + 2 : ""}
@@ -145,9 +156,12 @@ function About() {
                                                     : ""}
                                             </div>
                                             <div className="students-card row  ">
-                                                {obj.map((obj2,index) => {
+                                                {obj.map((obj2, index) => {
                                                     return (
-                                                        <div key={index} className="students-column mt-4 col-12 mx-auto col-md-6 col-lg-4 col-xl-3">
+                                                        <div
+                                                            key={index}
+                                                            className="students-column mt-4 col-12 mx-auto col-md-6 col-lg-4 col-xl-3"
+                                                        >
                                                             <div className="student ">
                                                                 <img
                                                                     src={
@@ -186,7 +200,7 @@ function About() {
                                     index = index + 1;
                                     return (
                                         <div key={index}>
-                                            <div  className="text-xl font-bold text-white mt-3 text-center">
+                                            <div className="text-xl font-bold text-white mt-3 text-center">
                                                 class:
                                                 {index < 11 ? index : ""}
                                                 {index > 11 ? "+" + 2 : ""}
@@ -195,10 +209,13 @@ function About() {
                                                     : ""}
                                             </div>
                                             <div className="students-card row  ">
-                                                {obj.map((obj2,index) => {
+                                                {obj.map((obj2, index) => {
                                                     // console.log(obj2);
                                                     return (
-                                                        <div key={index} className="students-column mt-4 col-12 mx-auto col-md-6 col-lg-4 col-xl-3">
+                                                        <div
+                                                            key={index}
+                                                            className="students-column mt-4 col-12 mx-auto col-md-6 col-lg-4 col-xl-3"
+                                                        >
                                                             <div className="student ">
                                                                 <img
                                                                     src={

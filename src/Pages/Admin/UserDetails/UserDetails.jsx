@@ -4,11 +4,13 @@ import { UserContext } from "../../../Context/UserContext";
 import { toast } from "react-toastify";
 
 function UserDetails() {
-    const {setispageloading}=useContext(UserContext)
+    const { setispageloading } = useContext(UserContext);
     const { user } = useContext(UserContext);
     const [alluser, setalluser] = useState([]);
     const getallusers = async () => {
         try {
+            setispageloading(true);
+
             const response = await fetch(`${server}/admin/get-all-user`, {
                 method: "GET",
                 headers: {
@@ -20,10 +22,13 @@ function UserDetails() {
                 // console.log(response);
                 const data = await response.json();
                 setalluser(data);
+                setispageloading(false);
             } else {
+                setispageloading(false);
                 toast.error("Failed to load users tab");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
@@ -41,7 +46,6 @@ function UserDetails() {
             );
             console.log(response);
             if (response.ok) {
-                getallusers();
                 setispageloading(false);
 
                 toast.success(
@@ -49,6 +53,7 @@ function UserDetails() {
                         isadmin ? "User" : "Admin"
                     }`
                 );
+                getallusers();
             } else {
                 setispageloading(false);
 

@@ -19,6 +19,33 @@ function SubjectHandling() {
     const handlesubjectinput = (name, value) => {
         setaddsubject({ ...addsubject, [name]: value });
     };
+    const getsubjectdata = async () => {
+        try {
+            setispageloading(true);
+            const response = await fetch(
+                `${server}/admin/${componentname}/get-subject-data`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            console.log(response);
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data);
+                setfetchdata(data);
+                setispageloading(false);
+            } else {
+                setispageloading(false);
+                toast.error("Failed to load subject data ");
+            }
+        } catch (error) {
+            setispageloading(false);
+            console.error(error);
+        }
+    };
     const handlesubjectsubmit = async (e) => {
         e.preventDefault();
         try {
@@ -36,9 +63,9 @@ function SubjectHandling() {
             console.log(response);
             if (response.ok) {
                 setaddsubject({ name: "", class: "" });
-                getsubjectdata();
                 setispageloading(false);
                 toast.success("Added subject successfully");
+                getsubjectdata();
             } else {
                 const error = await response.json();
                 setispageloading(false);
@@ -47,25 +74,6 @@ function SubjectHandling() {
         } catch (error) {
             setispageloading(false);
             console.log(error);
-        }
-    };
-    const getsubjectdata = async () => {
-        const response = await fetch(
-            `${server}/admin/${componentname}/get-subject-data`,
-            {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            }
-        );
-        console.log(response);
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data);
-            setfetchdata(data);
-        } else {
-            toast.error("Failed to load subject data ");
         }
     };
     const handledeleteclassinput = (name, value) => {
@@ -98,9 +106,9 @@ function SubjectHandling() {
             );
             if (response.ok) {
                 setdeletesubject({ class: "", subject: "" });
-                getsubjectdata();
                 setispageloading(false);
                 toast.success("Deleted subject Successfully");
+                getsubjectdata();
             } else {
                 setispageloading(false);
                 toast.success("Failed to Delete subject");

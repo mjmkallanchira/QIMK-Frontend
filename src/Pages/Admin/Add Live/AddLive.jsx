@@ -13,6 +13,29 @@ function AddLive() {
     const handleinput = (name, value) => {
         setlivedata({ ...livedata, [name]: value });
     };
+    const getalllive = async () => {
+        try {
+            setispageloading(true);
+            const response = await fetch(`${server}/admin/get-all-live`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            console.log(response);
+            if (response.ok) {
+                const data = await response.json();
+                setalllive(data);
+                setispageloading(false);
+            } else {
+                setispageloading(false);
+                toast.error("Failed to fetch live data");
+            }
+        } catch (error) {
+            setispageloading(false);
+            console.log(error);
+        }
+    };
     const handlesubmit = async (e) => {
         e.preventDefault();
         try {
@@ -31,9 +54,9 @@ function AddLive() {
                     url: "",
                     date: "",
                 });
-                getalllive();
                 setispageloading(false);
                 toast.success("Added Live succesfully");
+                getalllive();
             } else {
                 setispageloading(false);
                 toast.error("Failed to add Live ");
@@ -43,25 +66,7 @@ function AddLive() {
             console.log(error);
         }
     };
-    const getalllive = async () => {
-        try {
-            const response = await fetch(`${server}/admin/get-all-live`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            console.log(response);
-            if (response.ok) {
-                const data = await response.json();
-                setalllive(data);
-            } else {
-                toast.error("Failed to fetch live data");
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
+
     const deletelive = async (id) => {
         try {
             setispageloading(true);
@@ -72,9 +77,9 @@ function AddLive() {
                 },
             });
             if (response.ok) {
-                getalllive();
                 setispageloading(false);
                 toast.success("Deleted live succesfully");
+                getalllive();
             } else {
                 setispageloading(false);
                 toast.error("Failed to deleted live ");

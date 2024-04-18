@@ -24,6 +24,30 @@ function AddEducator() {
             });
         };
     };
+    const geteducatordata = async () => {
+        try {
+            setispageloading(true);
+            const response = await fetch(`${server}/admin/get-educator-data`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data);
+                seteducatorfetchdata(data);
+                setispageloading(false);
+            } else {
+                setispageloading(false);
+                toast.error("failed to load educator list ");
+            }
+        } catch (error) {
+            setispageloading(false);
+            console.log(error);
+        }
+    };
     const handlesubmit = async (e) => {
         e.preventDefault();
         try {
@@ -41,32 +65,13 @@ function AddEducator() {
                 seteducatordetails({ name: "", image: "" });
                 setispageloading(false);
                 toast.success("Educator Added Successfully");
+                geteducatordata();
             } else {
                 setispageloading(false);
                 toast.error(" Failed to Add Educator ");
             }
         } catch (error) {
             setispageloading(false);
-            console.log(error);
-        }
-    };
-    const geteducatordata = async () => {
-        try {
-            const response = await fetch(`${server}/admin/get-educator-data`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data);
-                seteducatorfetchdata(data);
-            } else {
-                toast.error("failed to load educator list ");
-            }
-        } catch (error) {
             console.log(error);
         }
     };
@@ -84,9 +89,9 @@ function AddEducator() {
             );
             console.log(response);
             if (response.ok) {
-                geteducatordata();
                 setispageloading(false);
                 toast.success("Deleted Educator Successfully");
+                geteducatordata();
             } else {
                 setispageloading(false);
                 toast.error("Failed to Delete Educator");

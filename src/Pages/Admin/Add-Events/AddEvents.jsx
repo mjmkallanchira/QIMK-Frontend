@@ -16,6 +16,29 @@ function AddEvents() {
     const handleinput = (name, value) => {
         seteventdata({ ...eventdata, [name]: value });
     };
+    const getallevent = async () => {
+        try {
+            setispageloading(true);
+            const response = await fetch(`${server}/admin/get-all-events`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            console.log(response);
+            if (response.ok) {
+                const data = await response.json();
+                setallevents(data);
+                setispageloading(false);
+            } else {
+                setispageloading(false);
+                toast.error("Failed to fetch Event data");
+            }
+        } catch (error) {
+            setispageloading(false);
+            console.log(error);
+        }
+    };
     const handlesubmit = async (e) => {
         e.preventDefault();
         try {
@@ -34,34 +57,15 @@ function AddEvents() {
                     Image: "",
                     date: "",
                 });
-                getallevent();
                 setispageloading(false);
                 toast.success("Added event succesfully");
+                getallevent();
             } else {
                 setispageloading(false);
                 toast.error("Failed to add event ");
             }
         } catch (error) {
             setispageloading(false);
-            console.log(error);
-        }
-    };
-    const getallevent = async () => {
-        try {
-            const response = await fetch(`${server}/admin/get-all-events`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            console.log(response);
-            if (response.ok) {
-                const data = await response.json();
-                setallevents(data);
-            } else {
-                toast.error("Failed to fetch Event data");
-            }
-        } catch (error) {
             console.log(error);
         }
     };
@@ -75,9 +79,9 @@ function AddEvents() {
                 },
             });
             if (response.ok) {
-                getallevent();
                 setispageloading(false);
                 toast.success("Deleted Event succesfully");
+                getallevent();
             } else {
                 setispageloading(false);
                 toast.error("Failed to deleted event ");

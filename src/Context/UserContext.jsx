@@ -52,6 +52,7 @@ export const Authprovider = ({ children }) => {
                 ispageloading,
                 setispageloading,
                 fetchloading,
+                setfetchloading,
                 storetokeninlokalstorage,
                 Logoutuser,
                 isloggedin,

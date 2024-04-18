@@ -7,7 +7,7 @@ function AddPrayerTime() {
     const { setispageloading } = useContext(UserContext);
     const navigate = useNavigate();
     const [isjumma, setisjumma] = useState(false);
-    const [allprayertime, setallprayertime] = useState([]);
+    const [allprayertime, setallprayertime] = useState([]); 
     const [prayertimedata, setprayertimedata] = useState({
         date: "",
         fajr: "",
@@ -33,6 +33,35 @@ function AddPrayerTime() {
             });
         };
     };
+    const getallprayertime = async () => {
+        try {
+            console.log("fetching");
+
+            setispageloading(true);
+            const response = await fetch(
+                `${server}/admin/get-all-prayer-time`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            // console.log(response);
+            if (response.ok) {
+                const data = await response.json();
+                // console.log(data);
+                setallprayertime(data);
+                setispageloading(false);
+            } else {
+                toast.error("Failed to Load all prayer time");
+                setispageloading(false);
+            }
+        } catch (error) {
+            setispageloading(false);
+            console.log(error);
+        }
+    };
     const handlesubmit = async (e) => {
         e.preventDefault();
         setispageloading(true);
@@ -57,9 +86,9 @@ function AddPrayerTime() {
                         imageofkhatib: "",
                         timeofkhutba: "",
                     });
+                    setispageloading(false);
                     toast.success("Added prayer time seccessfully");
                     getallprayertime();
-                    setispageloading(false);
                 } else {
                     setispageloading(false);
                     toast.error("The prayer time already exist ");
@@ -70,32 +99,9 @@ function AddPrayerTime() {
             console.log(error);
         }
     };
-    const getallprayertime = async () => {
-        try {
-            const response = await fetch(
-                `${server}/admin/get-all-prayer-time`,
-                {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-            // console.log(response);
-            if (response.ok) {
-                const data = await response.json();
-                // console.log(data);
-                setallprayertime(data);
-            } else {
-                toast.error("Failed to Load all prayer time");
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
     const deleteprayertime = async (id) => {
         try {
-            setispageloading(true)
+            setispageloading(true);
             const response = await fetch(
                 `${server}/admin/delete-prayer-time/${id}`,
                 {
@@ -106,15 +112,15 @@ function AddPrayerTime() {
                 }
             );
             if (response.ok) {
-                getallprayertime();
-                setispageloading(false)
+                setispageloading(false);
                 toast.success("Deleted prayer time succesfully ");
+                getallprayertime();
             } else {
-                setispageloading(false)
+                setispageloading(false);
                 toast.error("Failed to delete prayer time ");
             }
         } catch (error) {
-            setispageloading(false)
+            setispageloading(false);
             console.log(error);
         }
     };

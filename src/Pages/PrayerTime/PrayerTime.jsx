@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./PrayerTime.css";
 import { MdLabelImportant } from "react-icons/md";
 import { FaCalendarDays } from "react-icons/fa6";
 import { FaMosque } from "react-icons/fa";
-
+import { toast } from "react-toastify";
+import { UserContext } from "../../Context/UserContext";
 function PrayerTime(props) {
+    const { setispageloading } = useContext(UserContext);
     const [PrayerTime, setPrayerTime] = useState({});
     const [PrayerTimedate, setPrayerTimedate] = useState({
         hijri: "",
@@ -17,11 +19,12 @@ function PrayerTime(props) {
                 getprayertiming(position.coords);
             });
         } else {
-            console.log("Geolocation is not available in your browser.");
+            toast.warning("you have denied the permission for location ");
         }
     };
     const getprayertiming = async (position) => {
         try {
+            setispageloading(true);
             const response = await fetch(
                 `https://api.aladhan.com/v1/timings?latitude=${position.latitude}&longitude=${position.longitude}&method=3&school=0`
             );
@@ -44,17 +47,20 @@ function PrayerTime(props) {
                     data.data.date.gregorian.month.en +
                     " " +
                     data.data.date.gregorian.year;
-                    
+
                 setPrayerTimedate({
                     english: englishdate,
                     hijri: hijridate,
                 });
 
                 setPrayerTime(data.data.timings);
+                setispageloading(false);
             } else {
+                setispageloading(false);
                 console.log(response);
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };

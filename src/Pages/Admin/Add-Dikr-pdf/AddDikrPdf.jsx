@@ -25,6 +25,7 @@ function DikrPdf() {
     };
     const getalldikrs = async () => {
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/admin/get-dikr-pdf`, {
                 method: "GET",
                 headers: {
@@ -33,10 +34,13 @@ function DikrPdf() {
             });
             if (response.ok) {
                 setfetchdata(await response.json());
+                setispageloading(false);
             } else {
+                setispageloading(false);
                 toast.error("Failed loading  pdf  ");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
@@ -53,9 +57,9 @@ function DikrPdf() {
             });
             if (response.ok) {
                 setdikrdetails({ name: "", file: "" });
-                getalldikrs();
                 setispageloading(false);
                 toast.success("added pdf successfully");
+                getalldikrs();
             } else {
                 setispageloading(false);
 
@@ -81,9 +85,9 @@ function DikrPdf() {
                 }
             );
             if (response.ok) {
-                getalldikrs();
                 setispageloading(false);
                 toast.success("Deleted Dikr pdf successfully  ");
+                getalldikrs();
             } else {
                 setispageloading(false);
                 toast.error("Failed deleting  pdf  ");

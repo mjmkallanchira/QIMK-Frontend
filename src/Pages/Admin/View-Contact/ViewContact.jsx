@@ -10,6 +10,7 @@ function ViewContact() {
     const [contactdetails, setcontactdetails] = useState([]);
     const getcontactdetails = async () => {
         try {
+            setispageloading(true);
             const response = await fetch(
                 `${server}/admin/get-contact-details`,
                 {
@@ -24,8 +25,13 @@ function ViewContact() {
                 const data = await response.json();
                 // console.log(data);
                 setcontactdetails(data);
+                setispageloading(false);
+            } else {
+                setispageloading(false);
+                console.log(response);
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
@@ -43,9 +49,9 @@ function ViewContact() {
             );
             console.log(response);
             if (response.ok) {
-                getcontactdetails();
                 setispageloading(false);
                 toast.success("Deleted contact successfully");
+                getcontactdetails();
             } else {
                 setispageloading(false);
                 toast.error(" Failed to deleted contact");

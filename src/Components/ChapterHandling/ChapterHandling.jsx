@@ -25,23 +25,34 @@ function ChapterHandling() {
         chapter: [],
     });
     const getalldata = async () => {
-        const response = await fetch(
-            `${server}/admin/${componentname}/getbookdata`,
-            {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+        try {
+            setispageloading(true);
+            const response = await fetch(
+                `${server}/admin/${componentname}/getbookdata`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            console.log(response);
+            if (response.ok) {
+                const data = await response.json();
+                setfetchdata(data);
+                setispageloading(false);
+            } else {
+                setispageloading(false);
+                toast.error("Failed to load subject data ");
             }
-        );
-        console.log(response);
-        if (response.ok) {
-            const data = await response.json();
-            setfetchdata(data);
+        } catch (error) {
+            setispageloading(false);
+            console.error(error);
         }
     };
     const getsubjectdata = async () => {
         try {
+            setispageloading(true);
             const response = await fetch(
                 `${server}/admin/${componentname}/get-subject-data`,
                 {
@@ -55,10 +66,13 @@ function ChapterHandling() {
                 const data = await response.json();
 
                 setsubjectdata(data);
+                setispageloading(false);
             } else {
+                setispageloading(false);
                 toast.error("Failed to load subject data ");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
@@ -103,10 +117,10 @@ function ChapterHandling() {
             console.log(response);
             if (response.ok) {
                 setsubmitdata({ name: "", file: "", class: "", subject: "" });
-                getalldata();
                 setdeletedetails({ chapter: "", class: "", subject: "" });
                 setispageloading(false);
                 toast.success("Added chapter successfully");
+                getalldata();
             } else {
                 const error = await response.json();
                 setispageloading(false);
@@ -156,11 +170,11 @@ function ChapterHandling() {
             );
             console.log(response);
             if (response.ok) {
-                getsubjectdata();
                 setsubmitdata({ name: "", file: "", class: "", subject: "" });
                 setdeletedetails({ chapter: "", class: "", subject: "" });
                 setispageloading(false);
                 toast.success("Deleted Chapter Successfully");
+                getsubjectdata();
             } else {
                 setispageloading(false);
                 toast.error("Failed Deleting  Chapter ");

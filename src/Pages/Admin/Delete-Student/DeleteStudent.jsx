@@ -21,6 +21,7 @@ function DeleteStudent() {
     });
     const fetchstudentdata = async (e) => {
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/admin/getstudentdata`, {
                 method: "GET",
                 headers: {
@@ -30,10 +31,13 @@ function DeleteStudent() {
             if (response.ok) {
                 const data = await response.json();
                 setalldata(data);
+                setispageloading(false);
             } else {
+                setispageloading(false);
                 toast.error("Failed to fetch student data");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
@@ -84,9 +88,9 @@ function DeleteStudent() {
                     name: [],
                 });
                 setdeletesubmit({ gender: "", class: "", name: "" });
-                fetchstudentdata();
                 setispageloading(false);
                 toast.success("Student Deleted Successfully");
+                fetchstudentdata();
             } else {
                 setispageloading(false);
                 toast.error("Failed to delete Student");

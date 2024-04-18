@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { server } from "../../Constants/Constant";
 import { NavLink } from "react-router-dom";
+import { UserContext } from "../../Context/UserContext";
 function Dikr() {
     const [data, setdata] = useState([]);
+    const { setispageloading } = useContext(UserContext);
     const getalldikr = async () => {
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/get-dikr-data`, {
                 method: "GET",
                 headers: {
@@ -15,14 +18,17 @@ function Dikr() {
                 const data = await response.json();
                 console.log(data);
                 setdata(data);
+                setispageloading(false);
             } else {
+                setispageloading(false);
                 toast.error("Failed to load dikr tab");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
-   
+
     useEffect(() => {
         getalldikr();
     }, []);

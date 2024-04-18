@@ -3,12 +3,13 @@ import { server } from "../../../Constants/Constant";
 import { toast } from "react-toastify";
 import { UserContext } from "../../../Context/UserContext";
 function ViewDuas() {
-    const {setispageloading}=useContext(UserContext)
+    const { setispageloading } = useContext(UserContext);
 
     const [Duadetails, setDuadetails] = useState([]);
 
     const getduadata = async () => {
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/admin/get-dua-data`, {
                 method: "GET",
                 headers: {
@@ -17,15 +18,18 @@ function ViewDuas() {
             });
             if (response.ok) {
                 setDuadetails(await response.json());
+                setispageloading(false);
             } else {
+                setispageloading(false);
                 toast.error("Failed to load Dua tab");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
     const deletedua = async (id) => {
-        setispageloading(true)
+        setispageloading(true);
         try {
             const response = await fetch(`${server}/admin/delete-dua/${id}`, {
                 method: "GET",
@@ -34,15 +38,15 @@ function ViewDuas() {
                 },
             });
             if (response.ok) {
-                getduadata();
-                setispageloading(false)
+                setispageloading(false);
                 toast.success("Deleted Dua Successfully ");
+                getduadata();
             } else {
-                setispageloading(false)
+                setispageloading(false);
                 toast.error("Failed Deleting Dua  ");
             }
         } catch (error) {
-            setispageloading(false)
+            setispageloading(false);
             console.error(error);
         }
     };

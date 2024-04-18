@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Live.css";
 import Youtube from "react-youtube";
 import getYouTubeID from "get-youtube-id";
 import { server } from "../../Constants/Constant";
+import { UserContext } from "../../Context/UserContext";
 function Live() {
     const [livedata, setlivedata] = useState([]);
+    const { setispageloading } = useContext(UserContext);
     const getlivedata = async () => {
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/get-live-data`, {
                 method: "GET",
                 headers: {
@@ -17,10 +20,13 @@ function Live() {
                 const data = await response.json();
                 // console.log(data);
                 setlivedata(data);
+                setispageloading(false);
             } else {
+                setispageloading(false);
                 toast.error("Failed to load live tab");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };

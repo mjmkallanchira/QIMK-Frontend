@@ -3,6 +3,7 @@ import PrayerTimingTable from "../../../Components/PrayerTimeDetails/PrayerTimeD
 import { server } from "../../../Constants/Constant";
 import { toast } from "react-toastify";
 import PrayerTimeDetails from "../../../Components/PrayerTimeDetails/PrayerTimeDetails";
+import { UserContext } from "../../../Context/UserContext";
 
 function AdminHome() {
     const [views, setviews] = useState();
@@ -10,10 +11,11 @@ function AdminHome() {
     const [prayertimedata, setprayertimedata] = useState();
     const [studentsnumber, setstudentsnumber] = useState(0);
     const shouldlog = useRef(true);
-
+    const { setispageloading } = useContext(UserContext);
 
     const getuserviews = async () => {
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/admin/get-user-views`, {
                 method: "GET",
                 headers: {
@@ -24,15 +26,19 @@ function AdminHome() {
                 const data = await response.json();
                 // console.log(data.response[0].views);
                 setviews(data.response[0].views);
+                setispageloading(false);
             } else {
+                setispageloading(false);
                 toast.error("Failed to load views tab");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
     const getusernumber = async () => {
         try {
+            setispageloading(true);
             const response = await fetch(`${server}/admin/get-all-user`, {
                 method: "GET",
                 headers: {
@@ -44,15 +50,20 @@ function AdminHome() {
                 // console.log(response);
                 const data = await response.json();
                 setusers(data.length);
+                setispageloading(false);
             } else {
+                setispageloading(false);
                 toast.error("Failed to load users tab");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
     const fetchstudentdata = async (e) => {
         try {
+            setispageloading(true);
+
             const response = await fetch(`${server}/admin/getstudentdata`, {
                 method: "GET",
                 headers: {
@@ -62,7 +73,7 @@ function AdminHome() {
             if (response.ok) {
                 const data = await response.json();
 
-                if (data !=null) {
+                if (data != null) {
                     const classmodel = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, +1, +2];
 
                     let boys = data.find((element) => {
@@ -93,17 +104,21 @@ function AdminHome() {
                         return b;
                     };
                     setstudentsnumber(getLength(boys) + getLength(girls));
+                    setispageloading(false);
                 }
                 // console.log(data[0]);
             } else {
+                setispageloading(false);
                 toast.error("Failed to fetch student data");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
     const getprayertime = async () => {
         try {
+            setispageloading(true);
             let today = new Date();
             let date = today.getDate();
             let month = today.getMonth() + 1;
@@ -124,10 +139,13 @@ function AdminHome() {
                 const data = await response.json();
                 // console.log(data.jumma);
                 setprayertimedata(data);
+                setispageloading(false);
             } else {
+                setispageloading(false);
                 toast.error("Failed to load prayer time tab");
             }
         } catch (error) {
+            setispageloading(false);
             console.log(error);
         }
     };
