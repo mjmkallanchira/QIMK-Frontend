@@ -19,7 +19,7 @@ function classNames(...classes) {
 
 export default function Example() {
     const { user, Logoutuser, isloggedin } = useContext(UserContext);
-    console.log();
+    console.log(user);
     return (
         <Disclosure as="nav" className="bg-white header ">
             {({ open }) => (
@@ -94,7 +94,7 @@ export default function Example() {
                                             <Menu.Item>
                                                 {({ active }) => (
                                                     <>
-                                                        {isloggedin ? (
+                                                        {isloggedin && user ? (
                                                             <div>
                                                                 <button
                                                                     className={classNames(
