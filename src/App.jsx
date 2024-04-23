@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-
+import "./App.css";
 import UserLayout from "./Layout/UserLayout";
 import Home from "./Pages/Home/Home";
 import About from "./Pages/About/About";
@@ -37,57 +37,88 @@ import Quran from "./Pages/Quran/Quran";
 import Dua from "./Pages/Dua Request/Dua";
 import ViewDuas from "./Pages/Admin/View-Duas/ViewDuas";
 import ViewDikr from "./Components/View-dikr/ViewDikr";
+import VoteType from "./Pages/Vote/VoteType/VoteType";
+import Evm from "./Pages/Vote/Evm/Evm";
+import VoteList from "./Pages/Admin/Admin-Vote/Vote-list/VoteList";
+import AddRepresentative from "./Pages/Admin/Admin-Vote/Add-representatives/AddRepresentative";
+import ViewScore from "./Pages/Admin/Admin-Vote/View-Score/ViewScore";
 function App() {
     return (
-        < >
+        <>
             <Routes>
                 <Route path="/" element={<UserLayout />}>
                     <Route index element={<Home />} />
                     <Route path="prayer" element={<PrayerTime />} />
                     <Route path="about" element={<About />} />
-                    <Route path="services" element={<Services home={false} />} />
+                    <Route
+                        path="services"
+                        element={<Services home={false} />}
+                    />
                     <Route path="contactus" element={<ContactUs />} />
                     <Route path="booksandguide" element={<BooksAndGuide />} />
                     <Route
                         path="booksandguide/:type/:class"
-                        element={<Subject  />}
+                        element={<Subject />}
                     />
                     <Route
                         path="booksandguide/:type/:class/:subject"
                         element={<Chapter />}
                     />
-                    
+
                     <Route
                         path="booksandguide/:type/:class/:subject/:chapter"
-                        element={<ViewChapterFile  />}
+                        element={<ViewChapterFile />}
                     />
                     <Route path="/live" element={<Live />} />
                     <Route path="/Dikr" element={<Dikr />} />
-                    <Route path="/Dikr/:name" element={<ViewDikr     />} />
+                    <Route path="/Dikr/:name" element={<ViewDikr />} />
                     <Route path="/dua" element={<Dua />} />
                     <Route path="/Quran" element={<Quran />} />
                     <Route path="/signin" element={<Signin />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/events" element={<EventUpdates />} />
+                    <Route path="/vote" element={<VoteType />} />
+                    <Route path="/vote/:type" element={<Evm />} />
                     <Route path="*" element={<Error />} />
                 </Route>
-                <Route path="/admin" element={<AdminLayout/>}>
-                    <Route index element={<AdminHome/>} />
-                    <Route path="add-prayer-time" element={<AddPrayerTime/>} />
-                    <Route path="users" element={<UserDetails/>} />
-                    <Route path="add-live" element={<AddLive/>} />
-                    <Route path="add-events" element={<AddEvents/>} />
-                    <Route path="view-contact" element={<ViewContact/>} />
-                    <Route path="view-Duas" element={<ViewDuas/>} />
-                    <Route path="add-student" element={<AddStudent/>} />
-                    <Route path="delete-student" element={<DeleteStudent/>} />
-                    <Route path="add-educator" element={<AddEducator/>} />
-                    <Route path="dikr-pdf" element={<AddDikrPdf/>} />
-                    <Route path="add-books-and-guide" element={<AddBooksAndGuides/>} />
-                    <Route path="add-books-and-guide/notes" element={<Notes/>} />
-                    <Route path="add-books-and-guide/guides" element={<Guide/>} />
-                    <Route path="add-books-and-guide/:componentname/addchapter" element={<ChapterHandling  />} />
-                    <Route path="add-books-and-guide/:componentname/addsubject" element={<SubjectHandling  />} />
+                <Route path="/admin" element={<AdminLayout />}>
+                    <Route index element={<AdminHome />} />
+                    <Route path="add-prayer-time" element={<AddPrayerTime />} />
+                    <Route path="users" element={<UserDetails />} />
+                    <Route path="add-live" element={<AddLive />} />
+                    <Route path="add-events" element={<AddEvents />} />
+                    <Route path="view-contact" element={<ViewContact />} />
+                    <Route path="view-Duas" element={<ViewDuas />} />
+                    <Route path="add-student" element={<AddStudent />} />
+                    <Route path="delete-student" element={<DeleteStudent />} />
+                    <Route path="add-educator" element={<AddEducator />} />
+                    <Route path="dikr-pdf" element={<AddDikrPdf />} />
+                    <Route
+                        path="add-books-and-guide"
+                        element={<AddBooksAndGuides />}
+                    />
+                    <Route
+                        path="add-books-and-guide/notes"
+                        element={<Notes />}
+                    />
+                    <Route
+                        path="add-books-and-guide/guides"
+                        element={<Guide />}
+                    />
+                    <Route
+                        path="add-books-and-guide/:componentname/addchapter"
+                        element={<ChapterHandling />}
+                    />
+                    <Route
+                        path="add-books-and-guide/:componentname/addsubject"
+                        element={<SubjectHandling />}
+                    />
+                    <Route path="vote-list" element={<VoteList />} />
+                    <Route
+                        path="add-Representative"
+                        element={<AddRepresentative />}
+                    />
+                    <Route path="view-score" element={<ViewScore />} />
                 </Route>
             </Routes>
         </>
