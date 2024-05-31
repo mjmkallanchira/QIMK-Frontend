@@ -80,7 +80,7 @@ function PrayerTime(props) {
                         </div>
                     )}
                     <div className="font-bold col-12 text-center  italic">
-                        28,ramadan 1445
+                        {PrayerTimedate.hijri}
                     </div>
                     <div className="todays-prayer-time-table col-12 dark">
                         <div className="flex flex-col">
