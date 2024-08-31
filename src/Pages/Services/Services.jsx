@@ -111,6 +111,21 @@ function Services({ home }) {
                                 <div className="service-name">Dua Request</div>
                             </Link>
                         )}
+                        {home ? (
+                            ""
+                        ) : (
+                            <Link
+                                to="/scoreboard"
+                                className="service text-decoration-none"
+                            >
+                                <img
+                                    src="/score-board.png"
+                                    className="service-image"
+                                    alt=""
+                                />
+                                <div className="service-name">Score Board</div>
+                            </Link>
+                        )}
                     </div>
                     {home ? (
                         <button

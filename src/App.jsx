@@ -42,6 +42,11 @@ import Evm from "./Pages/Vote/Evm/Evm";
 import VoteList from "./Pages/Admin/Admin-Vote/Vote-list/VoteList";
 import AddRepresentative from "./Pages/Admin/Admin-Vote/Add-representatives/AddRepresentative";
 import ViewScore from "./Pages/Admin/Admin-Vote/View-Score/ViewScore";
+import ScoreBoard from "./Pages/ScoreBoard/ScoreBoard"
+import Score from "./Pages/Admin/Score/Score";
+import AddScore from "./Pages/Admin/Score/Add-Score/AddScore";
+import AddTeam from "./Pages/Admin/Score/Add-Team/AddTeam"
+import ChangeScore from "./Pages/Admin/Score/Add-Score/Change-Score/ChangeScore";
 function App() {
     return (
         <>
@@ -79,6 +84,7 @@ function App() {
                     <Route path="/events" element={<EventUpdates />} />
                     <Route path="/vote" element={<VoteType />} />
                     <Route path="/vote/:type" element={<Evm />} />
+                    <Route path="/scoreboard" element={<ScoreBoard/>} />
                     <Route path="*" element={<Error />} />
                 </Route>
                 <Route path="/admin" element={<AdminLayout />}>
@@ -119,6 +125,10 @@ function App() {
                         element={<AddRepresentative />}
                     />
                     <Route path="view-score" element={<ViewScore />} />
+                    <Route path="score" element={<Score />} />
+                    <Route path="add-team" element={<AddTeam/>} />
+                    <Route path="add-score" element={<AddScore />} />
+                    <Route path="add-score/change-score/:id/:name/:point" element={<ChangeScore />} />
                 </Route>
             </Routes>
         </>
