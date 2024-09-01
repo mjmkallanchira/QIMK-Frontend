@@ -100,7 +100,7 @@ function ScoreBoard() {
                                         <div className="text-white text-3xl  font-bold text-center  mt-2 ">
                                             {obj.name}
                                         </div>
-                                        <div className="text-green-400 text-2xl font-bold text-center   ">
+                                        <div className="text-green-400 text-2xl font-bold text-center mt-1  ">
                                             Points :{" "}
                                             <span className="text-teal-500">
                                                 {obj.point}
