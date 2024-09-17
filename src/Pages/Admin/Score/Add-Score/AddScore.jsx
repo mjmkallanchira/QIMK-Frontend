@@ -49,7 +49,7 @@ function AddScore() {
             return (
               <div className="col-12 my-5 col-lg-5 ">
                 <div className="  text-decoration-none notes p-2   flex flex-col flex-nowrap content-center justify-around items-center w-full    bg-gray-800 border border-gray-800 shadow-lg  rounded-2xl">
-                  <img src={obj.image} alt="" className="w-25 my-2" />
+                  <img src={obj.image} alt="" className="w-25 my-2 rounded-full " />
                   <div className="text-white text-2xl  font-bold text-center  mt-2 ">
                     {obj.name}
                   </div>
