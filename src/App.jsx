@@ -128,7 +128,7 @@ function App() {
                     <Route path="score" element={<Score />} />
                     <Route path="add-team" element={<AddTeam/>} />
                     <Route path="add-score" element={<AddScore />} />
-                    <Route path="add-score/change-score/:id/:name/:point" element={<ChangeScore />} />
+                    <Route path="add-score/change-score/:id/:name/:stagepoint/:offstagepoint" element={<ChangeScore />} />
                 </Route>
             </Routes>
         </>
