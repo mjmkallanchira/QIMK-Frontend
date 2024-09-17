@@ -20,10 +20,11 @@ function ScoreBoard() {
         const data = await response.json();
         console.log(data);
         //descending
-        data.sort(
-          (a, b) =>
-            b.stagepoint + b.offstagepoint - a.stagepoint + a.offstagepoint
-        );
+        data.sort((a, b) => {
+          let btotal = b.stagepoint + b.offstagepoint;
+          let atotal = a.stagepoint + a.offstagepoint;
+          return btotal - atotal;
+        });
         console.log(data);
         //
         setteamfetchdata(data);
@@ -115,13 +116,13 @@ function ScoreBoard() {
                       <div className="text-warning text-md font-bold text-center mt-3 ">
                         Stage :{" "}
                         <span className="text-indigo-500">
-                          {obj.stagepoint }
+                          {obj.stagepoint}
                         </span>
                       </div>
                       <div className="text-warning text-md font-bold text-center mt-3 ">
                         Offstage :{" "}
                         <span className="text-indigo-500">
-                          { obj.offstagepoint}
+                          {obj.offstagepoint}
                         </span>
                       </div>
                     </div>

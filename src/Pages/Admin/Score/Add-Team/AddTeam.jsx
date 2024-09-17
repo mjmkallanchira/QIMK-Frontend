@@ -64,7 +64,12 @@ function AddTeam() {
       });
       console.log(response);
       if (response.ok) {
-        setteamdetails({ name: "", image: "", point: 0 });
+        setteamdetails({
+          name: "",
+          image: "",
+          stagepoint: 0,
+          offstagepoint: 0,
+        });
         setispageloading(false);
         toast.success("team Added Successfully");
         getteamdata();
